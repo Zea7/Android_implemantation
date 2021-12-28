@@ -8,8 +8,14 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    private final int[] images = {
+            R.drawable.contact,
+            R.drawable.gallery,
+            R.drawable.note
+    };
 
 
     @Override
@@ -22,13 +28,11 @@ public class MainActivity extends AppCompatActivity {
         vp.setAdapter(adapter);
 
         TabLayout tab = findViewById(R.id.tab);
+
         tab.setupWithViewPager(vp);
 
-        ArrayList<Integer> images = new ArrayList<>();
-        images.add(R.drawable.contact);
-        images.add(R.drawable.gallery);
-        images.add(R.drawable.note);
 
-        for(int i=0; i<3; i++) tab.getTabAt(i).setIcon(images.get(i));
+
+        for(int i=0; i<3; i++) Objects.requireNonNull(tab.getTabAt(i)).setIcon(images[i]);
     }
 }
