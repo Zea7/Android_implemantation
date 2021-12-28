@@ -12,7 +12,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".GalleryActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:backgroundTint="#404040"
-                    app:icon="@drawable/camera"
+                    app:icon="@drawable/cjo"
                     app:iconTint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
