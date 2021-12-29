@@ -1,27 +1,27 @@
 package com.example.contact;
 
 public class Person {
-    String Name;
-    String PhoneNumber;
+    String name;
+    String phone;
 
-    public Person(String name, String phoneNumber) {
-        Name = name;
-        PhoneNumber = phoneNumber;
+    public Person(String name, String phone) {
+        this.name = name;
+        this.phone = phone;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return PhoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
