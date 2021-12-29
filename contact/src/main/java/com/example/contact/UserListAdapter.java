@@ -13,6 +13,7 @@ import java.util.List;
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyViewHolder> {
     private final List<Person> personList;
 
+    // viewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name, phone;
 
@@ -31,7 +32,6 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.user_item, parent, false);
-
         return new MyViewHolder(itemView);
     }
 

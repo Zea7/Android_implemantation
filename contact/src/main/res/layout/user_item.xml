@@ -13,6 +13,7 @@
         android:orientation="horizontal"
         tools:ignore="UselessParent">
 
+        <!--Icon-->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="100dp"
@@ -31,6 +32,7 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
+                <!--Name-->
                 <TextView
                     android:id="@+id/name"
                     android:layout_width="wrap_content"
@@ -45,6 +47,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <!--Phone-->
                 <TextView
                     android:id="@+id/phone"
                     android:layout_width="wrap_content"

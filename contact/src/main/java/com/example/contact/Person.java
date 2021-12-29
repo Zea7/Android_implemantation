@@ -1,8 +1,13 @@
 package com.example.contact;
 
 public class Person {
-    String name;
-    String phone;
+    private String name;
+    private String phone;
+
+    public Person() {
+        this.name = name;
+        this.phone = phone;
+    }
 
     public Person(String name, String phone) {
         this.name = name;
