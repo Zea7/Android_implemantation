@@ -37,6 +37,12 @@ public class VPAdapter extends FragmentStateAdapter {
         titles.add("노트");
     }
 
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return titles.get(position);
+    }
+
     @NonNull
     @Override
     public Fragment createFragment(int position) {
