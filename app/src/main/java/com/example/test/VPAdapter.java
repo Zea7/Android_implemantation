@@ -37,12 +37,6 @@ public class VPAdapter extends FragmentStateAdapter {
         titles.add("노트");
     }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return titles.get(position);
-    }
-
     @NonNull
     @Override
     public Fragment createFragment(int position) {
@@ -51,21 +45,6 @@ public class VPAdapter extends FragmentStateAdapter {
         else if(position == 1) return Fragment2.newInstance(position);
         else return Fragment3.newInstance(position);
 
-    }
-
-    @Nullable
-    public CharSequence getPageTitle(int position) {
-        return titles.get(position);
-    }
-
-    @NonNull
-    public Fragment getItem(int position) {
-        return items.get(position);
-    }
-
-
-    public int getCount() {
-        return items.size();
     }
 
     @Override

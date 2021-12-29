@@ -1,13 +1,12 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.contact"
-        minSdk 28
+        minSdk 29
         targetSdk 32
         versionCode 1
         versionName "1.0"
