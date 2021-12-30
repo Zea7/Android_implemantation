@@ -60,6 +60,7 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
     }
 
 
+    public IVAdapter() {}
 
     public IVAdapter(List<IVitem> a_list){
         images = a_list;
@@ -76,7 +77,7 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
     public void onBindViewHolder(@NonNull IVHolder viewHolder, int position){
         IVitem item = images.get(position);
 
-        Glide.with(viewHolder.img.getContext()).load(item.getImageResId()).into(viewHolder.img);
+        Glide.with(viewHolder.img.getContext()).load(item.getPath()).into(viewHolder.img);
     }
 
     @Override

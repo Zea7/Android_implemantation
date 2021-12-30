@@ -45,8 +45,7 @@ public class IVDecoration extends RecyclerView.ItemDecoration{
         GridLayoutManager.LayoutParams lp = (GridLayoutManager.LayoutParams) view.getLayoutParams();
         int spanIndex = lp.getSpanIndex();
 
-        if(spanIndex != 3) outRect.right = size10;
-        else ;
+        outRect.right = size10;
     }
 
 

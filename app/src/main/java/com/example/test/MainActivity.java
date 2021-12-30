@@ -1,10 +1,19 @@
 package com.example.test;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -13,12 +22,17 @@ import com.example.gallery.IVDecoration;
 import com.example.gallery.IVitem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int READ_PERMISSION_CODE = 101;
+    private static final int READ_CONTACTS_CODE = 100;
+
     private final int[] images = {
             R.drawable.contact,
             R.drawable.gallery,
@@ -29,6 +43,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super .onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        PermissionListener permissionListener = new PermissionListener() {
+            @Override
+            public void onPermissionGranted() {
+                Toast.makeText(MainActivity.this, "권한 허가", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+                Toast.makeText(MainActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+            }
+        };
+        String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE};
+
+        TedPermission.with(this)
+                .setPermissionListener(permissionListener)
+                .setRationaleMessage("권한이 필요합니다.")
+                .setDeniedMessage("[설정] > [권한] 에서 권한을 활성화해야 앱이 작동합니다.")
+                .setPermissions(permissions).check();
 
         ViewPager2 vp = findViewById(R.id.viewpager);
         VPAdapter adapter = new VPAdapter(this);
@@ -46,5 +79,38 @@ public class MainActivity extends AppCompatActivity {
             }
         }).attach();
 
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == READ_PERMISSION_CODE){
+            if(grantResults.length != 0){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "저장소 읽기 권한이 승인되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(this, "저장소 읽기 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
+//                moveTaskToBack(true);
+//                finishAndRemoveTask();
+//                System.exit(0);
+                }
+            }
+        } else if(requestCode == READ_CONTACTS_CODE){
+            if(grantResults.length != 0){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "연락처 읽기 권한이 승인되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(this, "연락처 읽기 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
+//                moveTaskToBack(true);
+//                finishAndRemoveTask();
+//                System.exit(0);
+                }
+            }
+        }
     }
 }

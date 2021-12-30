@@ -20,6 +20,10 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         myListContacts = listContacts;
         myContext = context;
     }
+
+    public ContactsRvAdapter(){
+
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,6 +45,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
     @Override
     public int getItemCount() {
+        if(myListContacts == null) return 0;
         return myListContacts.size();
     }
 
