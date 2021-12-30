@@ -20,8 +20,7 @@ public class IVDecoration extends RecyclerView.ItemDecoration{
     public IVDecoration(Context context) {
         super();
 
-        size10 = dpToPx(context, 10);
-        size5 = dpToPx(context, 5);
+        size10 = dpToPx(context, 5);
     }
 
     private int dpToPx(Context context, int dp){
@@ -46,13 +45,8 @@ public class IVDecoration extends RecyclerView.ItemDecoration{
         GridLayoutManager.LayoutParams lp = (GridLayoutManager.LayoutParams) view.getLayoutParams();
         int spanIndex = lp.getSpanIndex();
 
-        if(spanIndex == 0){
-            outRect.left = size10;
-            outRect.right = size5;
-        } else if(spanIndex == 1){
-            outRect.right = size10;
-            outRect.left = size5;
-        }
+        if(spanIndex != 3) outRect.right = size10;
+        else ;
     }
 
 

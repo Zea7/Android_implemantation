@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <ImageButton
         android:id="@+id/img_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:scaleType="fitXY"
         android:background = "@drawable/fitting_box"
         tools:ignore="MissingConstraints"

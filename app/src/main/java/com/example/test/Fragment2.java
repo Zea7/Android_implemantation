@@ -19,6 +19,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Fragment2 extends Fragment {
+    GalleryActivity g = new GalleryActivity();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,19 +58,6 @@ public class Fragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_gallery, container, false);
-
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.icon_gallery);
-
-        List<IVitem> items = new ArrayList<IVitem>();
-        for(int i=1; i<=26; i++){
-            items.add(new IVitem(getResources().getIdentifier("_" + i, "drawable", getActivity().getPackageName())));
-        }
-
-        adapter = new IVAdapter(items);
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new IVDecoration(getContext()));
-
-        return rootView;
+        return g.fragment_gallery(inflater, container, savedInstanceState);
     }
 }
