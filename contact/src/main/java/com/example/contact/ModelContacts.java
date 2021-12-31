@@ -1,11 +1,22 @@
 package com.example.contact;
 
-public class ModelContacts {
-    private String name, phoneNumber;
+import android.widget.ImageView;
 
-    public ModelContacts(String name, String phoneNumber) {
+public class ModelContacts {
+    private String icon, name, phoneNumber;
+
+    public ModelContacts(String icon, String name, String phoneNumber) {
+        this.icon = icon;
         this.name = name;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getName() {

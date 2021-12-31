@@ -134,7 +134,9 @@ public class Fragment1 extends Fragment {
                 null, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
         cursor.moveToFirst();
         while (cursor.moveToNext()){
-            list.add(new ModelContacts(cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+            list.add(new ModelContacts(
+                    cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.PHOTO_URI)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
                     cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))));
         }
         return list;
