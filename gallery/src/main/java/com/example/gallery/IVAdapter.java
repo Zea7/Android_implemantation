@@ -1,10 +1,13 @@
 package com.example.gallery;
 
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,7 @@ import java.util.List;
 
 public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
     private List<IVitem> images;
+    private Context content;
 
     public interface onImageClickListener {
         void onImageClick(View v, int position);
@@ -43,18 +47,6 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
 
             img = (ImageButton) itemview.findViewById(R.id.img_icon);
             img.setClipToOutline(true);
-            img.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View view){
-                    int pos = getAdapterPosition();
-                    if (pos != RecyclerView.NO_POSITION){
-                        if (mListener != null) {
-                            mListener.onImageClick(view, pos);
-                        }
-                    }
-
-                }
-            });
 
         }
     }
@@ -62,8 +54,9 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
 
     public IVAdapter() {}
 
-    public IVAdapter(List<IVitem> a_list){
+    public IVAdapter(Context _content, List<IVitem> a_list){
         images = a_list;
+        this.content = _content;
     }
 
     @Override
@@ -78,6 +71,21 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
         IVitem item = images.get(position);
 
         Glide.with(viewHolder.img.getContext()).load(item.getPath()).into(viewHolder.img);
+
+        viewHolder.img.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                String name = item.getPath().split("/")[item.getPath().split("/").length - 1];
+                System.out.println(name.split("."));
+
+                Log.d("GalleryAdapter", "Clicked" + item.getPath());
+
+                Intent intent = new Intent(content, TouchActivity.class);
+                intent.putExtra("image_path", item.getPath());
+                intent.putExtra("image_name", name);
+                content.startActivity(intent);
+            }
+        });
     }
 
     @Override
