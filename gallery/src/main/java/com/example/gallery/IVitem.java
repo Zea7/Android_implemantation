@@ -3,13 +3,13 @@ package com.example.gallery;
 import android.net.Uri;
 
 public class IVitem {
-    private int imageResId;
+    private String imageResId;
 
-    public IVitem(int redId){
+    public IVitem(String redId){
         imageResId = redId;
     }
 
-    public int getImageResId(){
+    public String getPath(){
         return imageResId;
     }
 }

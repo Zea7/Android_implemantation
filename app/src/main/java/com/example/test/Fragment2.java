@@ -1,22 +1,29 @@
 package com.example.test;
 
-<<<<<<< HEAD
-=======
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
->>>>>>> 6b3832d (Gallery Prototype(12.31))
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import com.example.contact.ModelContacts;
 import com.example.gallery.*;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +34,15 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Fragment2 extends Fragment {
-    GalleryActivity g = new GalleryActivity();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
-    private IVAdapter adapter;
+    private LinearLayout view;
+    private IVAdapter adapter = new IVAdapter();
+    private SwipeRefreshLayout refresh_layout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,9 +74,6 @@ public class Fragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-<<<<<<< HEAD
-        return g.fragment_gallery(inflater, container, savedInstanceState);
-=======
         try {
             return fragment_gallery(inflater, container, savedInstanceState);
         } catch (Exception e){
@@ -169,6 +174,5 @@ public class Fragment2 extends Fragment {
         }
 
         return list;
->>>>>>> 6b3832d (Gallery Prototype(12.31))
     }
 }

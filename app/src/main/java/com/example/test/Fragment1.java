@@ -1,15 +1,22 @@
 package com.example.test;
 
+import android.annotation.SuppressLint;
+import android.database.Cursor;
 import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.gallery.IVAdapter;
 import com.example.gallery.IVDecoration;
@@ -18,6 +25,8 @@ import com.example.gallery.IVitem;
 import java.util.ArrayList;
 import java.util.List;
 import com.example.contact.*;
+import com.google.android.material.snackbar.Snackbar;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,8 +39,9 @@ public class Fragment1 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private LinearLayout view;
     private RecyclerView recyclerView;
-    private UserListAdapter adapter;
+    private SwipeRefreshLayout refresh_layout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -59,47 +69,74 @@ public class Fragment1 extends Fragment {
         }
     }
 
+    @SuppressLint("ResourceType")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_gallery, container, false);
+        try {
+            return getContractView(inflater, container, savedInstanceState);
+        } catch (Exception e){
+            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_1, container, false);
+            view = (LinearLayout) rootView.findViewById(R.id.temp_layer);
+            refresh_layout = (SwipeRefreshLayout) rootView.findViewById(R.id.fragment_contact);
+            refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    view.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Snackbar.make(view, "Refresh Success", Snackbar.LENGTH_SHORT).show();
+                            refresh_layout.setRefreshing(false);
+                            Fragment1 fragment = Fragment1.newInstance(3);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.icon_gallery);
+                            FragmentManager fm = getParentFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            ft.replace(R.id.fragment_first, fragment).commitAllowingStateLoss();
+                        }
+                    }, 500);
+                }
+            });
+            return rootView;
+        }
+    }
 
-        List<Person> contactList = new ArrayList<Person>();
-        Person person = new Person("성민정", "010-4399-2755");
-        contactList.add(person);
+    private View getContractView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_contact, container, false);
 
-        person = new Person("복승주",  "010-6679-3956");
-        contactList.add(person);
-
-        person = new Person("탁유성",  "010-7810-3987");
-        contactList.add(person);
-
-        person = new Person("예효기",  "010-6936-3816");
-        contactList.add(person);
-
-        person = new Person("박병욱",  "010-4010-8889");
-        contactList.add(person);
-
-        person = new Person("홍주연",  "010-4043-2603");
-        contactList.add(person);
-
-        person = new Person("강원재",  "010-5152-5826");
-        contactList.add(person);
-
-        person = new Person("송지현",  "010-2345-8474");
-        contactList.add(person);
-
-        person = new Person("안원준",  "010-2618-3674");
-        contactList.add(person);
-        adapter = new UserListAdapter(contactList);
+        refresh_layout = (SwipeRefreshLayout) rootView.findViewById(com.example.contact.R.id.swipe_contact);
+        refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Snackbar.make(recyclerView, "Refresh Success", Snackbar.LENGTH_SHORT).show();
+                        refresh_layout.setRefreshing(false);
+                    }
+                }, 500);
+            }
+        });
+        recyclerView = rootView.findViewById(R.id.contact);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = linearLayoutManager;
+        recyclerView.setLayoutManager(layoutManager);
+        ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
         recyclerView.setAdapter(adapter);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-
         return rootView;
+    }
+
+
+    private List<ModelContacts> getContacts(){
+        List <ModelContacts> list = new ArrayList<>();
+        Cursor cursor = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                null, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
+        cursor.moveToFirst();
+        while (cursor.moveToNext()){
+            list.add(new ModelContacts(cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))));
+        }
+        return list;
     }
 }
