@@ -10,3 +10,4 @@ rootProject.name = "Test"
 include ':app'
 include ':gallery'
 include ':contact'
+include ':musicplayer'
