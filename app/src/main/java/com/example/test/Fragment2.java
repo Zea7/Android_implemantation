@@ -1,9 +1,12 @@
 package com.example.test;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -95,7 +98,7 @@ public class Fragment2 extends Fragment {
                 }
             });
             List<IVitem> list = getConstract(recyclerView);
-            IVAdapter newadapter = new IVAdapter(list);
+            IVAdapter newadapter = new IVAdapter(recyclerView.getContext(), list);
 
             newadapter.setOnImageClickListener(new IVAdapter.onImageClickListener() {
                 @Override
@@ -110,10 +113,9 @@ public class Fragment2 extends Fragment {
     }
 
     public ViewGroup fragment_gallery(LayoutInflater inflater, ViewGroup container,
-                                      Bundle savedInstanceState){
+                                      Bundle savedInstanceState) throws Exception {
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_gallery, container, false);
-
 
         refresh_layout = (SwipeRefreshLayout) rootView.findViewById(com.example.gallery.R.id.swipe_layout);
         refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -131,8 +133,11 @@ public class Fragment2 extends Fragment {
 
         recyclerView = (RecyclerView)rootView.findViewById(R.id.icon_gallery);
 
+        if(ContextCompat.checkSelfPermission(recyclerView.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            throw new Exception("저장소 권한 없이 읽기 시도");
+
         List<IVitem> list = getConstract(recyclerView);
-        adapter = new IVAdapter(list);
+        adapter = new IVAdapter(recyclerView.getContext(), list);
 
         adapter.setOnImageClickListener(new IVAdapter.onImageClickListener() {
             @Override
