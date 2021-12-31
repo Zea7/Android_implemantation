@@ -1,7 +1,15 @@
 package com.example.test;
 
+<<<<<<< HEAD
+=======
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+>>>>>>> 6b3832d (Gallery Prototype(12.31))
 import android.os.Bundle;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,6 +66,109 @@ public class Fragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+<<<<<<< HEAD
         return g.fragment_gallery(inflater, container, savedInstanceState);
+=======
+        try {
+            return fragment_gallery(inflater, container, savedInstanceState);
+        } catch (Exception e){
+            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_2, container, false);
+            view = (LinearLayout) rootView.findViewById(R.id.temp_layer_2);
+            refresh_layout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipe_image);
+            refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    view.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Snackbar.make(view, "Refresh Success", Snackbar.LENGTH_SHORT).show();
+                            refresh_layout.setRefreshing(false);
+                            Fragment2 fragment = Fragment2.newInstance(10);
+
+                            FragmentManager fm = getParentFragmentManager();
+                            FragmentTransaction ft = fm.beginTransaction();
+                            ft.replace(R.id.fragment_second, fragment).commitAllowingStateLoss();
+                        }
+                    }, 500);
+                }
+            });
+            List<IVitem> list = getConstract(recyclerView);
+            IVAdapter newadapter = new IVAdapter(recyclerView.getContext(), list);
+
+            newadapter.setOnImageClickListener(new IVAdapter.onImageClickListener() {
+                @Override
+                public void onImageClick(View v, int position) {
+                    LayoutInflater inflater = LayoutInflater.from(v.getContext());
+
+                }
+            });
+            recyclerView.swapAdapter(newadapter, true);
+            return rootView;
+        }
+    }
+
+    public ViewGroup fragment_gallery(LayoutInflater inflater, ViewGroup container,
+                                      Bundle savedInstanceState) throws Exception {
+
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_gallery, container, false);
+
+        refresh_layout = (SwipeRefreshLayout) rootView.findViewById(com.example.gallery.R.id.swipe_layout);
+        refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                recyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Snackbar.make(recyclerView, "Refresh Success", Snackbar.LENGTH_SHORT).show();
+                        refresh_layout.setRefreshing(false);
+                    }
+                }, 500);
+            }
+        });
+
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.icon_gallery);
+
+        if(ContextCompat.checkSelfPermission(recyclerView.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            throw new Exception("저장소 권한 없이 읽기 시도");
+
+        List<IVitem> list = getConstract(recyclerView);
+        adapter = new IVAdapter(recyclerView.getContext(), list);
+
+        adapter.setOnImageClickListener(new IVAdapter.onImageClickListener() {
+            @Override
+            public void onImageClick(View v, int position) {
+                LayoutInflater inflater = LayoutInflater.from(v.getContext());
+
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new IVDecoration(recyclerView.getContext()));
+        recyclerView.setNestedScrollingEnabled(false);
+
+        return rootView;
+    }
+
+    private List<IVitem> getConstract(View view){
+        List <IVitem> list = new ArrayList<>();
+        Uri uri;
+        Cursor cursor;
+        int column_index_data, column_index_folder_name;
+        String absolutePathofImage;
+        uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+
+        String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME};
+        cursor = view.getContext().getContentResolver().query(uri, projection, null, null, null);
+
+        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+
+        while (cursor.moveToNext()){
+            absolutePathofImage = cursor.getString(column_index_data);
+
+            list.add(new IVitem(absolutePathofImage));
+        }
+
+        return list;
+>>>>>>> 6b3832d (Gallery Prototype(12.31))
     }
 }
