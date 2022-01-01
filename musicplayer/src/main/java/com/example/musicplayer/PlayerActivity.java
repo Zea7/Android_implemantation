@@ -186,7 +186,10 @@ public class PlayerActivity extends AppCompatActivity {
                 Uri u = Uri.parse(mySongs.get(position).toString());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(),u);
                 sName = mySongs.get(position).getName();
+
                 txtSongName.setText(sName);
+                String endTime = createTime(mediaPlayer.getDuration());
+                txtSongStop.setText(endTime);
                 mediaPlayer.start();
                 btnPlay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
@@ -224,7 +227,7 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(mediaPlayer.isPlaying()){
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+10000);
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+9000);
                 }
             }
         });
@@ -234,7 +237,7 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(mediaPlayer.isPlaying()){
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-10000);
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-11000);
                 }
             }
         });
