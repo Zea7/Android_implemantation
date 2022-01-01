@@ -24,10 +24,10 @@ public class MusicPlayerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_music_player);
-
-        listView = findViewById(R.id.musicPlayerList);
-        displaySongs();
+//        setContentView(R.layout.activity_music_player);
+//
+//        listView = findViewById(R.id.musicPlayerList);
+//        displaySongs();
     }
 
     public ArrayList<File> findSong (File file){
@@ -47,7 +47,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         }
         return arrayList;
     }
-    void displaySongs(){
+    private void displaySongs(){
         final ArrayList<File> mySongs = findSong(Environment.getExternalStorageDirectory());
         items = new String[mySongs.size()];
         for(int i=0;i<mySongs.size();i++){

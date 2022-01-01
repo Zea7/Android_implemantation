@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.github.chrisbanes:PhotoView:2.3.0'
     implementation project(path: ':gallery')
     implementation project(path: ':contact')
+    implementation project(path: ':musicplayer')
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     testImplementation 'junit:junit:4.13.2'
