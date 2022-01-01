@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
             }
         };
-        String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE};
+        String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO};
 
         TedPermission.with(this)
                 .setPermissionListener(permissionListener)
@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
