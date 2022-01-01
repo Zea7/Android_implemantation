@@ -227,7 +227,7 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(mediaPlayer.isPlaying()){
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+10000);
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()+9000);
                 }
             }
         });
@@ -237,7 +237,7 @@ public class PlayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(mediaPlayer.isPlaying()){
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-10000);
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition()-11000);
                 }
             }
         });
