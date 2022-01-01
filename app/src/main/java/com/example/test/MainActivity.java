@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "권한 거부\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
             }
         };
-        String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
 
         TedPermission.with(this)
                 .setPermissionListener(permissionListener)
@@ -81,5 +81,37 @@ public class MainActivity extends AppCompatActivity {
         }).attach();
 
 
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == READ_PERMISSION_CODE){
+            if(grantResults.length != 0){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "저장소 읽기 권한이 승인되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(this, "저장소 읽기 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
+//                moveTaskToBack(true);
+//                finishAndRemoveTask();
+//                System.exit(0);
+                }
+            }
+        } else if(requestCode == READ_CONTACTS_CODE){
+            if(grantResults.length != 0){
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "연락처 읽기 권한이 승인되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(this, "연락처 읽기 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
+//                moveTaskToBack(true);
+//                finishAndRemoveTask();
+//                System.exit(0);
+                }
+            }
+        }
     }
 }
