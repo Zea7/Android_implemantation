@@ -212,6 +212,8 @@ public class PlayerActivity extends AppCompatActivity {
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
                 sName = mySongs.get(position).getName();
                 txtSongName.setText(sName);
+                String endTime = createTime(mediaPlayer.getDuration());
+                txtSongStop.setText(endTime);
                 mediaPlayer.start();
                 btnPlay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
