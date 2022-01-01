@@ -2,6 +2,8 @@ package com.example.contact;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.UiModeManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,8 +21,14 @@ public class ContactActivity2 extends AppCompatActivity {
         iv=(ImageView) findViewById(R.id.imageView2);
         tv1=(TextView) findViewById(R.id.name2);
         tv2=(TextView) findViewById(R.id.phone2);
-        if(getIntent().getStringExtra("Icon") == null)
-            Glide.with(this).asBitmap().load(R.drawable.person_black).into(iv);
+
+        UiModeManager ui = (UiModeManager) this.getSystemService(Context.UI_MODE_SERVICE);
+        if(getIntent().getStringExtra("Icon") == null) {
+            if (ui.getNightMode() == UiModeManager.MODE_NIGHT_YES)
+                Glide.with(this).load(R.drawable.person_white).into(iv);
+            else
+                Glide.with(this).load(R.drawable.person).into(iv);
+        }
         else
             Glide.with(this).asBitmap().load(getIntent().getStringExtra("Icon")).into(iv);
         tv1.setText(getIntent().getStringExtra("Name2"));

@@ -1,26 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100">
+    android:gravity="center"
+    android:theme="@style/Theme.ShowImage">
 
-    <ImageView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="70"
-        android:id="@+id/large_iamge"
-        android:scaleType="fitCenter"/>
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image_description"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:textColor="#000" />
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/large_iamge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        android:theme="@style/Theme.ShowImage">
+
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/Theme.ShowImage"
+            tools:ignore="RtlSymmetry" />
+        <FrameLayout
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/back_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/back_arrow"
+                android:background="@color/invisible"
+                app:tint="?attr/colorOnPrimary" />
+
+            <Button
+                android:id="@+id/back_button"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/invisible"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <ImageView
+                android:id="@+id/menu_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/move_vert"
+                android:background="@color/invisible"
+                app:tint="?attr/colorOnPrimary" />
+
+            <Button
+                android:id="@+id/menu_button"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/invisible"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </FrameLayout>
+
+    </FrameLayout>
 
 
 
-</LinearLayout>
+
+
+</FrameLayout>

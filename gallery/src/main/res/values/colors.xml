@@ -10,4 +10,10 @@
 
     <color name="selected_white">#55FFFFFF</color>
     <color name="selected_none">#00FFFFFF</color>
+    <color name="navy">#2A3D66</color>
+    <color name="bright">#22CCD3</color>
+    <color name="invisible">#00FF0000</color>
+
+    <color name="invi_navy">#332A3D66</color>
+    <color name="invi_bright">#3322CCD3</color>
 </resources>

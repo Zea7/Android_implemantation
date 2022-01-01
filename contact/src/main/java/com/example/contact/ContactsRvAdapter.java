@@ -1,5 +1,6 @@
 package com.example.contact;
 
+import android.app.UiModeManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -48,10 +49,17 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         contact_name = holder.contact_name;
         contact_phoneNumber = holder.contact_phoneNumber;
 
+        UiModeManager ui = (UiModeManager) myContext.getSystemService(Context.UI_MODE_SERVICE);
+
         if(temp.getIcon() == null)
-            Glide.with(myContext).load(R.drawable.person_black).into(contact_icon);
+            if(ui.getNightMode() == UiModeManager.MODE_NIGHT_YES)
+                Glide.with(myContext).load(R.drawable.person_white).into(contact_icon);
+            else
+                Glide.with(myContext).load(R.drawable.person).into(contact_icon);
         else
             Glide.with(myContext).asBitmap().load(myListContacts.get(position).getIcon()).into(contact_icon);
+
+
         contact_name.setText(myListContacts.get(position).getName());
         contact_phoneNumber.setText(myListContacts.get(position).getPhoneNumber());
 

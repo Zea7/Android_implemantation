@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Gallery</string>
+    <string name="Info">상세 정보 확인</string>
 </resources>

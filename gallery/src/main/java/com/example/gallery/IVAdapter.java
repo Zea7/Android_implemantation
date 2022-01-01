@@ -75,14 +75,10 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
         viewHolder.img.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                String name = item.getPath().split("/")[item.getPath().split("/").length - 1];
-                System.out.println(name.split("."));
-
                 Log.d("GalleryAdapter", "Clicked" + item.getPath());
 
                 Intent intent = new Intent(content, TouchActivity.class);
                 intent.putExtra("image_path", item.getPath());
-                intent.putExtra("image_name", name);
                 content.startActivity(intent);
             }
         });

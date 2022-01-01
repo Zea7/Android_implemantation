@@ -42,10 +42,10 @@ public class VPAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        size++;
         if(position == 0) return Fragment1.newInstance(position);
         else if(position == 1) return Fragment2.newInstance(position);
-        else return Fragment3.newInstance(position);
+        else if(position == 2) return Fragment3.newInstance(position);
+        else return new Fragment();
 
     }
 

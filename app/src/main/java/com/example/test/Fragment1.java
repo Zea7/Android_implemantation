@@ -113,6 +113,9 @@ public class Fragment1 extends Fragment {
                     public void run() {
                         Snackbar.make(recyclerView, "Refresh Success", Snackbar.LENGTH_SHORT).show();
                         refresh_layout.setRefreshing(false);
+
+                        ContactsRvAdapter newadapter = new ContactsRvAdapter(recyclerView.getContext(), getContacts());
+                        recyclerView.swapAdapter(newadapter, true);
                     }
                 }, 500);
             }
@@ -121,7 +124,7 @@ public class Fragment1 extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         RecyclerView.LayoutManager layoutManager = linearLayoutManager;
         recyclerView.setLayoutManager(layoutManager);
-        ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
+        ContactsRvAdapter adapter = new ContactsRvAdapter(recyclerView.getContext(), getContacts());
         recyclerView.setAdapter(adapter);
 
         return rootView;
