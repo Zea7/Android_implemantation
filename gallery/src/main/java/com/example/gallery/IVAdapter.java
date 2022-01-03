@@ -35,12 +35,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
-    private List<IVitem> images;
+    private ArrayList<IVitem> images;
     private Context content;
 
 
@@ -69,7 +71,7 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
 
     public IVAdapter() {}
 
-    public IVAdapter(Context _content, List<IVitem> a_list){
+    public IVAdapter(Context _content, ArrayList<IVitem> a_list){
         images = a_list;
         this.content = _content;
     }
@@ -84,6 +86,7 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
     @Override
     public void onBindViewHolder(@NonNull IVHolder viewHolder, int position){
         IVitem item = images.get(position);
+        int p = position;
 
         Glide.with(viewHolder.img.getContext()).load(item.getPath()).into(viewHolder.img);
 
@@ -95,6 +98,8 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
                 Intent intent = new Intent(content, TouchActivity.class);
                 intent.putExtra("image_path", item.getPath());
                 intent.putExtra("image_uri", item.getUri());
+                intent.putExtra("images", images);
+                intent.putExtra("num", p);
                 content.startActivity(intent);
             }
         });

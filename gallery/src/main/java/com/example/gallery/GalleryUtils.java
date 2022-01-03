@@ -47,7 +47,7 @@ public class GalleryUtils {
         if(ContextCompat.checkSelfPermission(recyclerView.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             throw new Exception("저장소 권한 없이 읽기 시도");
 
-        List<IVitem> list = getConstract(recyclerView);
+        ArrayList<IVitem> list = getConstract(recyclerView);
 
         refresh_layout = (SwipeRefreshLayout) rootView.findViewById(com.example.gallery.R.id.swipe_layout);
         refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -96,8 +96,8 @@ public class GalleryUtils {
         return rootView;
     }
 
-    private List<IVitem> getConstract(View view){
-        List <IVitem> list = new ArrayList<>();
+    private ArrayList<IVitem> getConstract(View view){
+        ArrayList <IVitem> list = new ArrayList<>();
         Uri uri;
         Uri uripath;
         Cursor cursor;
@@ -121,7 +121,7 @@ public class GalleryUtils {
     }
 
     private void refresh(){
-        List<IVitem> newlist = getConstract(recyclerView);
+        ArrayList<IVitem> newlist = getConstract(recyclerView);
         adapter = new IVAdapter(recyclerView.getContext(), newlist);
         recyclerView.swapAdapter(adapter, true);
     }

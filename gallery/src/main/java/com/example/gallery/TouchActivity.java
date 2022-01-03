@@ -1,5 +1,6 @@
 package com.example.gallery;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -52,7 +53,8 @@ public class TouchActivity extends AppCompatActivity {
     private Uri uri;
     private Context content = this;
     private static final int DELETE_REQUEST_CODE = 13;
-    private int pos = 0;
+    private ArrayList<IVitem> images;
+    private int position;
 
     private enum StatusBarColorType{
         DARK (R.color.invi_navy);
@@ -70,57 +72,48 @@ public class TouchActivity extends AppCompatActivity {
     private final String TAG = "TouchActivity";
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==android.R.id.home){
+            onBackPressed();
+        }
+        else if(item.getItemId()==R.id.action_menu)
+            Toast.makeText(TouchActivity.this, imageName, Toast.LENGTH_SHORT).show();
+        else if(item.getItemId()==R.id.delete)
+            alert(uri);
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.pop_up, menu);
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
         setContentView(R.layout.activity_touch);
 
+        getSupportActionBar().setTitle("Gallery");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         Log.d(TAG, "onCreate: started.");
 
-        ActionBar ab = getSupportActionBar();
-        ab.hide();
-
-        getWindow().setStatusBarColor(ContextCompat.getColor(this, StatusBarColorType.DARK.getBackgroundColorId()));
-
-        ImageView imageView = findViewById(R.id.back_image);
-
         getIncomingIntent();
-
-        Button button = findViewById(R.id.back_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        findViewById(R.id.menu_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
-                getMenuInflater().inflate(R.menu.pop_up, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        if (menuItem.getItemId() == R.id.action_menu){
-                            Toast.makeText(TouchActivity.this, imageName, Toast.LENGTH_SHORT).show();
-                        }
-                        else if(menuItem.getItemId() == R.id.delete){
-                            alert(uri);
-                        }
-
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
-        });
+        setImage(uri.toString());
     }
 
     private void getIncomingIntent() {
         if(getIntent().hasExtra("image_path")){
             String imagePath = getIntent().getStringExtra("image_path");
+            Bundle b = getIntent().getExtras();
+            images = (ArrayList) b.getParcelableArrayList("images");
+            position = getIntent().getIntExtra("num", 0);
+
             uri = getIntent().getParcelableExtra("image_uri");
 
             setImage(imagePath);

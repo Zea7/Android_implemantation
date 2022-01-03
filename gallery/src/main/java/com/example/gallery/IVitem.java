@@ -2,7 +2,9 @@ package com.example.gallery;
 
 import android.net.Uri;
 
-public class IVitem {
+import java.io.Serializable;
+
+public class IVitem implements Serializable {
     private String imageResId;
     private Uri uri;
 
