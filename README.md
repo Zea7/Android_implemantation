@@ -30,7 +30,7 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 
 # Tab
 
-## Tab 1 연락처
+## Tab 1 연락처  
 휴대폰 외부 저장소의 연락처 목록을 전부 받아와 오름차순으로 보여준다.  
 연락처를 받아올 때 외부 저장소에 저장된 프로필 사진을 가져와 아이콘에 보여준다.  
 만약 저장된 사진이 없다면 다음과 같은 사진을 보여준다.  
