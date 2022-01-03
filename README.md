@@ -31,10 +31,12 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 # Tab
 
 ## Tab 1 연락처  
+
 휴대폰 외부 저장소의 연락처 목록을 전부 받아와 오름차순으로 보여준다.  
 연락처를 받아올 때 외부 저장소에 저장된 프로필 사진을 가져와 아이콘에 보여준다.  
 만약 저장된 사진이 없다면 다음과 같은 사진을 보여준다.  
 ![person](https://user-images.githubusercontent.com/68819204/147920890-da2d34da-ee85-4e75-8b41-e7ad9a857178.png)  
+
 ------------
 
 연락처는 RecyclerView를 이용하여 보여주었으며 RecyclerView에 연결되는 각 아이템에는 프로필 사진과 이름, 전화번호를 보여준다. 
