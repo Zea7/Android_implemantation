@@ -17,7 +17,7 @@ TedPermission Library를 이용하여 권한 허용 요청을 보냈으며,
 사용하는 권한은 외부 저장소 사용, 외부 연락처 사용, 카메라, 녹음 허용이다.  
 
 
-###### TedPermission  
+##### TedPermission  
 ```Java
 String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
 
