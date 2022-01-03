@@ -76,7 +76,7 @@ public class MusicUtils {
         final String[] cursor = {MediaStore.Audio.Media._ID, MediaStore.Audio.Media.ALBUM,  MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION };
         final String where = MediaStore.Audio.Media.IS_MUSIC + "=1";
-        final Cursor cursor1 = content.getContentResolver().query(uri, cursor, where, null, null);
+        final Cursor cursor1 = content.getContentResolver().query(uri, cursor, where, null, MediaStore.Audio.Media.TITLE + " ASC");
         while(cursor1.moveToNext()){
             String album = cursor1.getString(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
             String title = cursor1.getString(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
