@@ -74,16 +74,10 @@ public class Fragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return adaptMusicPlayer(inflater, container, savedInstanceState);
+        MusicUtils utils = new MusicUtils(getContext(), inflater, savedInstanceState, container);
+        return utils.adaptMusic();
     }
 
-    private View adaptMusicPlayer(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        ViewGroup rootView = (ViewGroup) inflater.inflate(com.example.musicplayer.R.layout.activity_music_player, container, false);
-        recyclerView = (RecyclerView) rootView.findViewById(com.example.musicplayer.R.id.musicPlayerList);
-
-
-        return rootView;
-    }
 
 
 }
