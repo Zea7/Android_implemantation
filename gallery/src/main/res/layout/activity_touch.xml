@@ -8,10 +8,15 @@
     android:gravity="center">
 
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/large_iamge"
+<!--    <com.github.chrisbanes.photoview.PhotoView-->
+<!--        android:id="@+id/large_iamge"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/image_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
 

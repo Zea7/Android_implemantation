@@ -7,6 +7,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.app.Activity;
@@ -20,10 +21,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.database.Cursor;
+import android.graphics.RectF;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -39,6 +42,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.github.chrisbanes.photoview.OnMatrixChangedListener;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -55,6 +59,8 @@ public class TouchActivity extends AppCompatActivity {
     private static final int DELETE_REQUEST_CODE = 13;
     private ArrayList<IVitem> images;
     private int position;
+    private ImageFragmentAdapter viewAdapter;
+    private ViewPager2 viewPager2;
 
     private enum StatusBarColorType{
         DARK (R.color.invi_navy);
@@ -78,8 +84,10 @@ public class TouchActivity extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.action_menu)
             Toast.makeText(TouchActivity.this, imageName, Toast.LENGTH_SHORT).show();
-        else if(item.getItemId()==R.id.delete)
-            alert(uri);
+        else if(item.getItemId()==R.id.delete) {
+            int pos = viewPager2.getCurrentItem();
+            alert(images.get(pos).getUri());
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -105,16 +113,23 @@ public class TouchActivity extends AppCompatActivity {
 
         getIncomingIntent();
         setImage(uri.toString());
+        viewPager2 = findViewById(R.id.image_viewpager);
+        viewAdapter = new ImageFragmentAdapter(this, images, position);
+        viewPager2.setAdapter(viewAdapter);
+        Handler handler = new Handler();
+        viewPager2.setCurrentItem(position, true);
+
     }
 
     private void getIncomingIntent() {
-        if(getIntent().hasExtra("image_path")){
-            String imagePath = getIntent().getStringExtra("image_path");
+        if(getIntent().hasExtra("images")){
             Bundle b = getIntent().getExtras();
             images = (ArrayList) b.getParcelableArrayList("images");
+            String imagePath = getIntent().getStringExtra("image_path");
+            uri = getIntent().getParcelableExtra("image_uri");
             position = getIntent().getIntExtra("num", 0);
 
-            uri = getIntent().getParcelableExtra("image_uri");
+
 
             setImage(imagePath);
             imageName = imagePath.split("/")[imagePath.split("/").length - 1];
@@ -123,8 +138,14 @@ public class TouchActivity extends AppCompatActivity {
 
     private void setImage(String imagePath) {
 
-        PhotoView image = findViewById(R.id.large_iamge);
-        Glide.with(this).asBitmap().load(imagePath).into(image);
+//        PhotoView image = findViewById(R.id.large_iamge);
+//        Glide.with(this).asBitmap().load(imagePath).into(image);
+//        image.setOnMatrixChangeListener(new OnMatrixChangedListener() {
+//            @Override
+//            public void onMatrixChanged(RectF rect) {
+//
+//            }
+//        });
     }
 
     void requestDeletePermission(List<Uri> uriList) {

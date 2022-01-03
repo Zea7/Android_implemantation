@@ -96,10 +96,12 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
                 Log.d("GalleryAdapter", "Clicked" + item.getPath());
 
                 Intent intent = new Intent(content, TouchActivity.class);
+
+                intent.putExtra("images", images);
                 intent.putExtra("image_path", item.getPath());
                 intent.putExtra("image_uri", item.getUri());
-                intent.putExtra("images", images);
                 intent.putExtra("num", p);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 content.startActivity(intent);
             }
         });
@@ -110,7 +112,4 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
     public int getItemCount(){
         return images.size();
     }
-
-
-
 }
