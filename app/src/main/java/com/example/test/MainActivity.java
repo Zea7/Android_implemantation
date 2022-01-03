@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 tab.setText(names.get(position));
             }
         }).attach();
-
-
     }
 
 

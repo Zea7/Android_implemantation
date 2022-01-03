@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.UiModeManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
@@ -18,9 +20,12 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class PlayerActivity extends AppCompatActivity {
@@ -30,11 +35,12 @@ public class PlayerActivity extends AppCompatActivity {
     BarVisualizer visualizer;
     ImageView imageView;
 
-    String sName;
+    String sName, imagePath;
     public static final String EXTRA_NAME = "song_name";
     static MediaPlayer mediaPlayer;
     int position;
-    ArrayList<File> mySongs;
+    String mySongs;
+    ArrayList<Music> musicArrayList;
     Thread updateSeekBar;
 
     @Override
@@ -83,13 +89,22 @@ public class PlayerActivity extends AppCompatActivity {
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
 
-        mySongs = (ArrayList) bundle.getParcelableArrayList("songs");
-        String songName = i.getStringExtra("songName");
-        position = bundle.getInt("pos", 0);
+        mySongs = i.getStringExtra("songs");
+        musicArrayList = (ArrayList) bundle.getParcelableArrayList("songList");
+        // String songName = i.getStringExtra("songName");
+        position = i.getIntExtra("position",0);
         txtSongName.setSelected(true);
-        Uri uri = Uri.parse(mySongs.get(position).toString());
-        sName = mySongs.get(position).getName();
+        Uri uri = Uri.parse(mySongs);
+        sName = i.getStringExtra("songName");
+        imagePath = i.getStringExtra("songImage");
+        Uri imagePathUri = Uri.parse(imagePath);
+
         txtSongName.setText(sName);
+        Glide.with(this).asBitmap().load(imagePath).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
+
+
+        txtSongName.setText(getIntent().getStringExtra("songName"));
+
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
@@ -113,6 +128,7 @@ public class PlayerActivity extends AppCompatActivity {
         };
         seekMusic.setMax(mediaPlayer.getDuration());
         updateSeekBar.start();
+        //noinspection deprecation
         seekMusic.getProgressDrawable().setColorFilter(getResources().getColor(R.color.bright_black), PorterDuff.Mode.MULTIPLY);
         seekMusic.getThumb().setColorFilter(getResources().getColor(R.color.bright_black), PorterDuff.Mode.SRC_IN);
 
@@ -182,10 +198,10 @@ public class PlayerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                position = ((position+1)%mySongs.size());
-                Uri u = Uri.parse(mySongs.get(position).toString());
+                position = ((position+1)%musicArrayList.size());
+                Uri u = Uri.parse(musicArrayList.get(position).getUriStr());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(),u);
-                sName = mySongs.get(position).getName();
+                sName = musicArrayList.get(position).getName();
 
                 txtSongName.setText(sName);
                 String endTime = createTime(mediaPlayer.getDuration());
@@ -194,9 +210,12 @@ public class PlayerActivity extends AppCompatActivity {
                 btnPlay.setBackgroundResource(R.drawable.ic_pause);
                 startAnimation(imageView);
                 int audioSessionId = mediaPlayer.getAudioSessionId();
+                System.out.println(musicArrayList.get(position).getImagePath());
                 if(audioSessionId != -1){
                     visualizer.setAudioSessionId(audioSessionId);
                 }
+                Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
+
             }
         });
 
@@ -206,11 +225,11 @@ public class PlayerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
-                position = ((position-1<0)?(mySongs.size()-1):(position-1));
+                position = ((position-1<0)?(musicArrayList.size()-1):(position-1));
 
-                Uri u = Uri.parse(mySongs.get(position).toString());
+                Uri u = Uri.parse(musicArrayList.get(position).getUriStr());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
-                sName = mySongs.get(position).getName();
+                sName = musicArrayList.get(position).getName();
                 txtSongName.setText(sName);
                 String endTime = createTime(mediaPlayer.getDuration());
                 txtSongStop.setText(endTime);
@@ -221,6 +240,7 @@ public class PlayerActivity extends AppCompatActivity {
                 if(audioSessionId != -1){
                     visualizer.setAudioSessionId(audioSessionId);
                 }
+                Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
             }
         });
 
@@ -247,7 +267,7 @@ public class PlayerActivity extends AppCompatActivity {
 
     public void startAnimation(View view){
         ObjectAnimator animator = ObjectAnimator.ofFloat(imageView, "rotation", 0f,360f);
-        animator.setDuration(1000);
+        animator.setDuration(2000);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(animator);
 
