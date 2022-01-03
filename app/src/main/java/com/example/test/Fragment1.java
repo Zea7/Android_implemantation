@@ -74,8 +74,9 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ContactUtils utils = new ContactUtils(inflater, container, savedInstanceState, getContext());
         try {
-            return getContractView(inflater, container, savedInstanceState);
+            return utils.getContractView();
         } catch (Exception e){
             ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_1, container, false);
             view = (LinearLayout) rootView.findViewById(R.id.temp_layer);
@@ -101,47 +102,4 @@ public class Fragment1 extends Fragment {
         }
     }
 
-    private View getContractView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_contact, container, false);
-
-        refresh_layout = (SwipeRefreshLayout) rootView.findViewById(com.example.contact.R.id.swipe_contact);
-        refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                recyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Snackbar.make(recyclerView, "Refresh Success", Snackbar.LENGTH_SHORT).show();
-                        refresh_layout.setRefreshing(false);
-
-                        ContactsRvAdapter newadapter = new ContactsRvAdapter(recyclerView.getContext(), getContacts());
-                        recyclerView.swapAdapter(newadapter, true);
-                    }
-                }, 500);
-            }
-        });
-        recyclerView = rootView.findViewById(R.id.contact);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        RecyclerView.LayoutManager layoutManager = linearLayoutManager;
-        recyclerView.setLayoutManager(layoutManager);
-        ContactsRvAdapter adapter = new ContactsRvAdapter(recyclerView.getContext(), getContacts());
-        recyclerView.setAdapter(adapter);
-
-        return rootView;
-    }
-
-
-    private List<ModelContacts> getContacts(){
-        List <ModelContacts> list = new ArrayList<>();
-        Cursor cursor = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                null, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
-        cursor.moveToFirst();
-        while (cursor.moveToNext()){
-            list.add(new ModelContacts(
-                    cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.PHOTO_URI)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))));
-        }
-        return list;
-    }
 }

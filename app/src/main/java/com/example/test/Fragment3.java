@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -40,7 +41,7 @@ public class Fragment3 extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private ListView listView;
+    private RecyclerView recyclerView;
     private String[] items;
 
 
@@ -78,10 +79,9 @@ public class Fragment3 extends Fragment {
 
     private View adaptMusicPlayer(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         ViewGroup rootView = (ViewGroup) inflater.inflate(com.example.musicplayer.R.layout.activity_music_player, container, false);
-        listView = (ListView) rootView.findViewById(com.example.musicplayer.R.id.musicPlayerList);
+        recyclerView = (RecyclerView) rootView.findViewById(com.example.musicplayer.R.id.musicPlayerList);
 
-        MusicUtils musicplayer = new MusicUtils(listView.getContext(), listView, inflater);
-        musicplayer.displaySongs();
+
         return rootView;
     }
 
