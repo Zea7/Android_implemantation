@@ -89,4 +89,8 @@ cursor = view.getContext().getContentResolver().query(uri, projection, null, nul
 > ![Screenshot_20220103-213128_Music Player - 복사본](https://user-images.githubusercontent.com/49242646/147930939-6163c36b-204f-45ed-a006-1eef46963999.jpg)
 
 > ![InkedScreenshot_20220103-212734_Music Player_LI](https://user-images.githubusercontent.com/49242646/147930668-2e69f214-8012-4357-9143-045116f67fe0.jpg)
-
+> 1. fast_rewind 버튼을 누르면 10초 전으로 이동한다.
+> 2. skip_prev 버튼을 누르면 이전 곡을 재생한다.
+> 3. play_arrow 버튼을 누르면 pause 아이콘으로 바뀌고 곡 재생이 멈추며, pause 버튼을 누르면 play_arrow 아이콘으로 바뀌고 곡이 재생된다.
+> 4. skip_next 버튼을 누르면 다음 곡을 재생한다.
+> 5. fast_forward 버튼을 누르면 10초 후로 이동한다.
