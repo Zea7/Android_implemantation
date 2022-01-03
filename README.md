@@ -35,7 +35,6 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 연락처를 받아올 때 외부 저장소에 저장된 프로필 사진을 가져와 아이콘에 보여준다.  
 만약 저장된 사진이 없다면 다음과 같은 사진을 보여준다.  
 ![person](https://user-images.githubusercontent.com/68819204/147920890-da2d34da-ee85-4e75-8b41-e7ad9a857178.png)  
-
 ------------
 
 연락처는 RecyclerView를 이용하여 보여주었으며 RecyclerView에 연결되는 각 아이템에는 프로필 사진과 이름, 전화번호를 보여준다. 
@@ -49,5 +48,24 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 > 추가, 삭제, 수정 기능 
 
 ## Tab 2 사진첩
+휴대폰 외부 저장소의 이미지를 전부 받아와 내림차순으로 보여준다.  
+이미지가 외부 저장소에서 변경된 마지막 시간을 기준으로 내림차순하는 것이기 때문에 이름과 관계없이 보여진다.  
+```Java
+cursor = view.getContext().getContentResolver().query(uri, projection, null, null, MediaStore.MediaColumns.DATE_TAKEN + " DESC");
+```
+
+사진첩도 RecyclerView를 사용하여 보여주었으며 각 아이템은 사진을 centerCrop을 통해 아이템 fitting box 내에 scaling하여 보여준다.  
+### 사진 추가  
+카메라 이미지 버튼을 클릭하면 휴대폰 기본 카메라 앱을 불러와 사진을 찍을 수 있는 기능이 구현되어 있으며 찍은 사진은 바로 외부 저장소에 저장된다.  
+저장하거나 혹은 삭제한 사진은 바로 적용되지는 않지만 SwipeRefreshLayout이 적용되어 있기 때문에 swipe를 통해 리스트를 refresh하여 확인할 수 있다.  
+
+
+> 각 아이템을 클릭하게 되면 다음과 같은 형태로 확대하여 보여주며 PhotoView Library를 사용하여 손으로 드래그를 통해 확대 축소가 가능하다.  
+> ### 사진 추가
+> App bar 위치에 뒤로가기 버튼과 메뉴 버튼을 구현하였으며 메뉴 버튼을 누르면 상세 정보 확인과 삭제할 수 있는 메뉴가 나타난다.
+> 상세 정보 확인을 누르면 사진의 이름이 Toast message 형태로 나타난다.  
+> 삭제를 누르면 permission이 요청되며 실제로 사진을 삭제할 수 있다. 삭제를 취소하면 activity가 끝나지 않지만 삭제를 하게 될 경우에는 자동으로 activity가 종료된다.  
+
+
 
 ## Tab 3 음악 플레이어
