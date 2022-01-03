@@ -1,6 +1,7 @@
 package com.example.gallery;
 
 import android.Manifest;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -98,21 +99,22 @@ public class GalleryUtils {
     private List<IVitem> getConstract(View view){
         List <IVitem> list = new ArrayList<>();
         Uri uri;
+        Uri uripath;
         Cursor cursor;
         int column_index_data, column_index_folder_name;
         String absolutePathofImage;
         uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
-        String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.MediaColumns.DATE_TAKEN, MediaStore.MediaColumns._ID};
+        String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.MediaColumns.DATE_TAKEN, MediaStore.Images.Media._ID};
         cursor = view.getContext().getContentResolver().query(uri, projection, null, null, MediaStore.MediaColumns.DATE_TAKEN + " DESC");
 
         column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
 
         while (cursor.moveToNext()){
             absolutePathofImage = cursor.getString(column_index_data);
+            uripath = ContentUris.withAppendedId(MediaStore.Images.Media.getContentUri("external"), Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))));
 
-
-            list.add(new IVitem(absolutePathofImage));
+            list.add(new IVitem(absolutePathofImage, uripath));
         }
 
         return list;

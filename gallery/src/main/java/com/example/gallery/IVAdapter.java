@@ -1,12 +1,21 @@
 package com.example.gallery;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.GradientDrawable;
+import android.media.Image;
 import android.net.Uri;
+import android.provider.BaseColumns;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,20 +23,26 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
     private List<IVitem> images;
     private Context content;
+
 
     public interface onImageClickListener {
         void onImageClick(View v, int position);
@@ -79,10 +94,12 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
 
                 Intent intent = new Intent(content, TouchActivity.class);
                 intent.putExtra("image_path", item.getPath());
+                intent.putExtra("image_uri", item.getUri());
                 content.startActivity(intent);
             }
         });
     }
+
 
     @Override
     public int getItemCount(){

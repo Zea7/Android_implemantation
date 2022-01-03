@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private final int[] images = {
             R.drawable.contact,
             R.drawable.gallery,
-            R.drawable.note
+            R.drawable.music
     };
 
     @Override
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tab = findViewById(R.id.tab);
 
-        List<String> names = new ArrayList<String>(){{add("연락처");add("사진첩");add("노트");}};
+        List<String> names = new ArrayList<String>(){{add("연락처");add("사진첩");add("플레이리스트");}};
 
         new TabLayoutMediator(tab, vp, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
