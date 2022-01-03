@@ -7,12 +7,8 @@ Android implementation
 
 # 기본적인 구성
 ## Tab layout & ViewPager 2
-
-
-
-
-
-MainActivity는 3개의 tab을 가지는 Tab layout이다. 여기에 VPAdapter(@FragmentStateAdapter)를 사용하여 ViewPager 2를 연결해주어 Tab layout과 Viewpager를 동시에 사용하였다.
+MainActivity는 3개의 tab을 가지는 Tab layout이다.  
+여기에 VPAdapter(@FragmentStateAdapter)를 사용하여 ViewPager 2를 연결해주어 Tab layout과 Viewpager를 동시에 사용하였다.
 
 ## Tab 1 연락처
 
