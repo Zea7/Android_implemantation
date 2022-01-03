@@ -86,5 +86,7 @@ cursor = view.getContext().getContentResolver().query(uri, projection, null, nul
 ### 사진추가
 > 사진 영역은 음악 플레이어 리스트를 보여주었을 때와 마찬가지로 앨범 사진을 보여주며  
 > 곡 제목을 보다 크게 보여준다
+> ![Screenshot_20220103-213128_Music Player - 복사본](https://user-images.githubusercontent.com/49242646/147930939-6163c36b-204f-45ed-a006-1eef46963999.jpg)
+
 > ![InkedScreenshot_20220103-212734_Music Player_LI](https://user-images.githubusercontent.com/49242646/147930668-2e69f214-8012-4357-9143-045116f67fe0.jpg)
 
