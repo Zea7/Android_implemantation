@@ -94,3 +94,5 @@ cursor = view.getContext().getContentResolver().query(uri, projection, null, nul
 > 3. play_arrow 버튼을 누르면 pause 아이콘으로 바뀌고 곡 재생이 멈추며, pause 버튼을 누르면 play_arrow 아이콘으로 바뀌고 곡이 재생된다.
 > 4. skip_next 버튼을 누르면 다음 곡을 재생한다.
 > 5. fast_forward 버튼을 누르면 10초 후로 이동한다.
+
+> audiovisualizer 라이브러리를 이용하여 소리의 음량에 따라 그래프를 보여준다.
