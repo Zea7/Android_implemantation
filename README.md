@@ -18,7 +18,7 @@ TedPermission Library를 이용하여 권한 허용 요청을 보냈으며,
 
 
 TedPermission  
-'''Java
+```Java
 String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
 
         TedPermission.with(this)
@@ -26,7 +26,7 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
                 .setRationaleMessage("권한이 필요합니다.")
                 .setDeniedMessage("[설정] > [권한] 에서 권한을 활성화해야 앱이 작동합니다.")
                 .setPermissions(permissions).check();
-'''
+```
 
 # Tab
 
