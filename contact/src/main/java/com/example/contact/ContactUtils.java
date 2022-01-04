@@ -1,8 +1,12 @@
 package com.example.contact;
 
+import android.content.ContentProvider;
+import android.content.ContentProviderOperation;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
@@ -87,5 +91,61 @@ public class ContactUtils {
                     cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))));
         }
         return list;
+    }
+
+    public static Cursor getContactCursor(ContentResolver contactHelper, String startsWith){
+        String[] projection = {ContactsContract.CommonDataKinds.Phone._ID,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.NUMBER};
+        Cursor cursor = null;
+        try{
+            if(startsWith != null && !startsWith.equals("")){
+                cursor = contactHelper.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, projection, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " line \""
+                + startsWith + "%\"", null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME +" ASC");
+            }
+            else{
+                cursor = contactHelper.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, projection, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
+            }
+            cursor.moveToFirst();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return cursor;
+    }
+
+    public static void deleteContact(ContentResolver contactHelper, String number){
+        ArrayList<ContentProviderOperation> cpo = new ArrayList<>();
+        String[] args = new String[]{String.valueOf(getContactID(contactHelper, number))};
+        cpo.add(ContentProviderOperation.newDelete(ContactsContract.RawContacts.CONTENT_URI)
+                .withSelection(ContactsContract.RawContacts.CONTACT_ID + "=?", args).build());
+        try{
+            contactHelper.applyBatch(ContactsContract.AUTHORITY, cpo);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private static long getContactID(ContentResolver contactHelper, String number) {
+        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+        String[] projection = {ContactsContract.PhoneLookup._ID};
+        Cursor cursor = null;
+
+        try{
+            cursor = contactHelper.query(contactUri, projection, null, null, null);
+            if(cursor.moveToFirst()){
+                int personID = cursor.getColumnIndexOrThrow(ContactsContract.PhoneLookup._ID);
+                return cursor.getLong(personID);
+            }
+            return -1;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(cursor!=null){
+                cursor.close();
+                cursor=null;
+            }
+        }
+        return -1;
     }
 }

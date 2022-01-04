@@ -99,6 +99,11 @@ public class AddContact extends AppCompatActivity {
         String setName = name.getText().toString().trim();
         String setNumber = number.getText().toString().trim();
 
+        if(setNumber.equals("") || setName.equals("")) {
+            Toast.makeText(this, "이름, 전화번호를 입력해주세요!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         ArrayList<ContentProviderOperation> cpo = new ArrayList<>();
 
         int rawContactID = cpo.size();
