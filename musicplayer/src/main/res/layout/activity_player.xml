@@ -27,15 +27,29 @@
             android:id="@+id/songName2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginTop="20dp"
             android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
-            android:padding="10dp"
+            android:padding="5dp"
             android:singleLine="true"
             android:text="Song name"
             android:textAlignment="center"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:fontFamily="@font/pretendard_regular"/>
 
+        <TextView
+            android:id="@+id/songArtist2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:padding="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Song Artist"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:fontFamily="@font/pretendard_regular"/>
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
@@ -60,7 +74,8 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="20dp"
                 android:text="0:10"
-                android:textSize="14sp">
+                android:textSize="14sp"
+                android:fontFamily="@font/pretendard_regular">
 
             </TextView>
 
@@ -72,7 +87,8 @@
                 android:layout_marginRight="20dp"
                 android:gravity="center_vertical|right"
                 android:text="0:10"
-                android:textSize="14sp">
+                android:textSize="14sp"
+                android:fontFamily="@font/pretendard_regular">
 
             </TextView>
         </FrameLayout>

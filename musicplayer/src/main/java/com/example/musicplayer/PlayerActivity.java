@@ -30,12 +30,12 @@ import java.util.ArrayList;
 
 public class PlayerActivity extends AppCompatActivity {
     Button btnPlay, btnNext, btnPrev, btnFf, btnFr;
-    TextView txtSongName, txtSongStart, txtSongStop;
+    TextView txtSongName,txtSongArtist, txtSongStart, txtSongStop;
     SeekBar seekMusic;
     BarVisualizer visualizer;
     ImageView imageView;
 
-    String sName, imagePath;
+    String sName, sArtist, imagePath;
     public static final String EXTRA_NAME = "song_name";
     static MediaPlayer mediaPlayer;
     int position;
@@ -74,6 +74,7 @@ public class PlayerActivity extends AppCompatActivity {
         btnFf = findViewById(R.id.ffbtn);
         btnFr = findViewById(R.id.frbtn);
         txtSongName = findViewById(R.id.songName2);
+        txtSongArtist = findViewById(R.id.songArtist2);
         txtSongStart = findViewById(R.id.txtSongStart);
         txtSongStop = findViewById(R.id.txtSongStop);
         seekMusic = findViewById(R.id.seekBar);
@@ -91,20 +92,22 @@ public class PlayerActivity extends AppCompatActivity {
 
         mySongs = i.getStringExtra("songs");
         musicArrayList = (ArrayList) bundle.getParcelableArrayList("songList");
-        // String songName = i.getStringExtra("songName");
         position = i.getIntExtra("position",0);
         txtSongName.setSelected(true);
+        txtSongArtist.setSelected(true);
         Uri uri = Uri.parse(mySongs);
         sName = i.getStringExtra("songName");
+        sArtist = i.getStringExtra("songArtist");
         imagePath = i.getStringExtra("songImage");
         Uri imagePathUri = Uri.parse(imagePath);
 
         txtSongName.setText(sName);
+        txtSongArtist.setText(sArtist);
         Glide.with(this).asBitmap().load(imagePath).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
 
 
         txtSongName.setText(getIntent().getStringExtra("songName"));
-
+        txtSongArtist.setText(getIntent().getStringExtra("songArtist"));
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
         mediaPlayer.start();
@@ -202,8 +205,10 @@ public class PlayerActivity extends AppCompatActivity {
                 Uri u = Uri.parse(musicArrayList.get(position).getUriStr());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(),u);
                 sName = musicArrayList.get(position).getName();
+                sArtist = musicArrayList.get(position).getArtist();
 
                 txtSongName.setText(sName);
+                txtSongArtist.setText(sArtist);
                 String endTime = createTime(mediaPlayer.getDuration());
                 txtSongStop.setText(endTime);
                 mediaPlayer.start();
@@ -230,7 +235,9 @@ public class PlayerActivity extends AppCompatActivity {
                 Uri u = Uri.parse(musicArrayList.get(position).getUriStr());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), u);
                 sName = musicArrayList.get(position).getName();
+                sArtist = musicArrayList.get(position).getArtist();
                 txtSongName.setText(sName);
+                txtSongArtist.setText(sArtist);
                 String endTime = createTime(mediaPlayer.getDuration());
                 txtSongStop.setText(endTime);
                 mediaPlayer.start();

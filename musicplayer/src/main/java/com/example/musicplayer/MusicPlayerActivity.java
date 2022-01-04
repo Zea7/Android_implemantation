@@ -66,19 +66,20 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
     private void getAllAudio(){
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        final String[] cursor = {MediaStore.Audio.Media._ID, MediaStore.Audio.Media.ALBUM,  MediaStore.Audio.Media.TITLE,
+        final String[] cursor = {MediaStore.Audio.Media._ID, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,  MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION };
         final String where = MediaStore.Audio.Media.IS_MUSIC + "=1";
         final Cursor cursor1 = this.getContentResolver().query(uri, cursor, where, null, MediaStore.Audio.Media.TITLE + " ASC");
         while(cursor1.moveToNext()){
             String album = cursor1.getString(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+            String artist = cursor1.getString(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST));
             String title = cursor1.getString(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
             String songUri = cursor1.getString(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA));
             long albumId = cursor1.getLong(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID));
             int duration = cursor1.getInt(cursor1.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION));
             Uri imagePath = Uri.parse("content://media/external/audio/albumart");
             Uri imagePathUri = ContentUris.withAppendedId(imagePath, albumId);
-            Music music = new Music(title, album,  String.valueOf(duration), songUri, String.valueOf(albumId), imagePathUri.toString());
+            Music music = new Music(title, artist, album,  String.valueOf(duration), songUri, String.valueOf(albumId), imagePathUri.toString());
             arrayList.add(music);
         }
     }
