@@ -17,6 +17,7 @@ import android.app.RecoverableSecurityException;
 import android.app.StatusBarManager;
 import android.app.UiModeManager;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -112,7 +113,7 @@ public class TouchActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         getIncomingIntent();
-        setImage(uri.toString());
+        images = setImage();
         viewPager2 = findViewById(R.id.image_viewpager);
         viewAdapter = new ImageFragmentAdapter(this, images, position);
         viewPager2.setAdapter(viewAdapter);
@@ -122,30 +123,38 @@ public class TouchActivity extends AppCompatActivity {
     }
 
     private void getIncomingIntent() {
-        if(getIntent().hasExtra("images")){
+        if(getIntent().hasExtra("image_path")){
             Bundle b = getIntent().getExtras();
-            images = (ArrayList) b.getParcelableArrayList("images");
             String imagePath = getIntent().getStringExtra("image_path");
             uri = getIntent().getParcelableExtra("image_uri");
             position = getIntent().getIntExtra("num", 0);
 
-
-
-            setImage(imagePath);
             imageName = imagePath.split("/")[imagePath.split("/").length - 1];
         }
     }
 
-    private void setImage(String imagePath) {
+    private ArrayList<IVitem> setImage() {
+        ArrayList <IVitem> list = new ArrayList<>();
+        Uri uri;
+        Uri uripath;
+        Cursor cursor;
+        int column_index_data, column_index_folder_name;
+        String absolutePathofImage;
+        uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
-//        PhotoView image = findViewById(R.id.large_iamge);
-//        Glide.with(this).asBitmap().load(imagePath).into(image);
-//        image.setOnMatrixChangeListener(new OnMatrixChangedListener() {
-//            @Override
-//            public void onMatrixChanged(RectF rect) {
-//
-//            }
-//        });
+        String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.MediaColumns.DATE_TAKEN, MediaStore.Images.Media._ID};
+        cursor = this.getContentResolver().query(uri, projection, null, null, MediaStore.MediaColumns.DATE_TAKEN + " DESC");
+
+        column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+
+        while (cursor.moveToNext()){
+            absolutePathofImage = cursor.getString(column_index_data);
+            uripath = ContentUris.withAppendedId(MediaStore.Images.Media.getContentUri("external"), Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))));
+
+            list.add(new IVitem(absolutePathofImage, uripath));
+        }
+
+        return list;
     }
 
     void requestDeletePermission(List<Uri> uriList) {
