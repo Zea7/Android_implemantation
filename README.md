@@ -81,7 +81,7 @@ cursor = view.getContext().getContentResolver().query(uri, projection, null, nul
 
 ------------
 
-음악 플레이어는 RecyclerView를 이용하여 보여주었으며 RecyclerView에 연결되는 각 아이템에는 앨범 사진과 곡 제목을 보여준다.  
+음악 플레이어는 RecyclerView를 이용하여 보여주었으며 RecyclerView에 연결되는 각 아이템에는 앨범 사진과 곡 제목, 아티스트를 보여준다.  
 
 <img src="https://user-images.githubusercontent.com/49242646/147933525-e7d4076e-f44a-4c01-be78-1500433fedef.jpg" width="205" height="412"/>
 <img src="https://user-images.githubusercontent.com/49242646/147933917-b276adb9-0a42-4126-999d-a33a5141c641.jpg"  width="205" height="412"/>
@@ -90,7 +90,7 @@ cursor = view.getContext().getContentResolver().query(uri, projection, null, nul
 
 > 음악 아이템 클릭하면, 다음과 같은 형태로 음악 재생 창이 뜨고 노래가 바로 재생되며 앨범 사진이 360도 회전한다.  
 > 사진 영역은 음악 플레이어 리스트를 보여주었을 때와 마찬가지로 앨범 사진을 보여주며  
-> 곡 제목을 보다 크게 보여준다  
+> 곡 제목, 아티스트를 보다 크게 보여준다  
 <img src="https://user-images.githubusercontent.com/49242646/147934803-5dd0b5ea-e77e-4dba-940f-13b07b2e6490.gif"  width="205" height="412"/>
 
 > 1. fast_rewind 버튼을 누르면 10초 전으로 이동한다.
