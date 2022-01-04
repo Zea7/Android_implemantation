@@ -1,12 +1,14 @@
 package com.example.contact;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +26,7 @@ public class ContactUtils {
     private ViewGroup container;
     private Bundle savedInstanceState;
     private Context content;
+    private ImageButton plus;
 
     public ContactUtils(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState, Context content) {
         this.inflater = inflater;
@@ -34,6 +37,16 @@ public class ContactUtils {
 
     public View getContractView(){
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_contact, container, false);
+
+        plus = rootView.findViewById(R.id.add_contacts);
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(content, AddContact.class);
+                content.startActivity(intent);
+
+            }
+        });
 
         refresh_layout = (SwipeRefreshLayout) rootView.findViewById(com.example.contact.R.id.swipe_contact);
         refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
