@@ -88,6 +88,5 @@ public class MusicUtils {
             Music music = new Music(title, album,  String.valueOf(duration), songUri, String.valueOf(albumId), imagePathUri.toString());
             arrayList.add(music);
         }
-
     }
 }

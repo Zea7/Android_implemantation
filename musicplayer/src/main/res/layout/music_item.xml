@@ -38,7 +38,8 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:text="Song Name"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:fontFamily="@font/pretendard_regular">
 
         </TextView>
     </RelativeLayout>
