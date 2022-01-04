@@ -53,7 +53,7 @@ ContactActivity2는 연락처의 정보를 크게 보여주며 상단 메뉴에 
 AddContact Activity는 새로운 연락처를 추가하여 저장하는
 
 + ### Tab 2 사진첩  
- 
+<img src="https://user-images.githubusercontent.com/49242646/148055118-4b19e9f2-3532-4967-a333-6da336fc9f36.gif" width="205" height="411"/>
 
 
 
