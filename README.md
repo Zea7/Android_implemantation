@@ -81,7 +81,8 @@ cursor = view.getContext().getContentResolver().query(uri, projection, null, nul
 
 ------------
 
-음악 플레이어는 RecyclerView를 이용하여 보여주었으며 RecyclerView에 연결되는 각 아이템에는 앨범 사진과 곡 제목을 보여준다.   
+음악 플레이어는 RecyclerView를 이용하여 보여주었으며 RecyclerView에 연결되는 각 아이템에는 앨범 사진과 곡 제목을 보여준다.  
+
 <img src="https://user-images.githubusercontent.com/49242646/147933525-e7d4076e-f44a-4c01-be78-1500433fedef.jpg" width="205" height="412"/>
 <img src="https://user-images.githubusercontent.com/49242646/147933917-b276adb9-0a42-4126-999d-a33a5141c641.jpg"  width="205" height="412"/>
 
