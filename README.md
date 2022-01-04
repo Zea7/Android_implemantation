@@ -2,11 +2,12 @@
 
 
 ## 팀원  
-- 정민근, KAIST 19, 전산학부
+- 정민근, KAIST 19, 전산학부Cancel changes
 - 최윤정, 숙명여대 19, 컴퓨터과학전공  
 
 # 기본적인 구성  
 <img src="https://user-images.githubusercontent.com/49242646/148054090-300991dc-dd5f-446f-9287-9678d88f869a.gif" width="205" height="411"/>  
+
 + ### Splash Screen  
 앱을 실행하면 앱 이름(브링Bring)을 보여주는 Splash Screen이 2초 동안 뜨고 MainActivity로 넘어간다.
 
