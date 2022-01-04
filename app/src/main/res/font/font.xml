@@ -4,4 +4,8 @@
         android:fontStyle = "normal"
         android:fontWeight = "400"
         android:font = "@font/cafe_font"/>
+    <font
+        android:fontStyle = "normal"
+        android:fontWeight = "400"
+        android:font = "@font/wandohopeb"/>
 </font-family>

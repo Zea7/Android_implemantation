@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tab = findViewById(R.id.tab);
 
-        List<String> names = new ArrayList<String>(){{add("연락처");add("사진첩");add("플레이리스트");}};
+        List<String> names = new ArrayList<String>(){{add("연락처");add("사진첩");add("음악 플레이어");}};
 
         new TabLayoutMediator(tab, vp, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
