@@ -58,7 +58,7 @@ AddContact Activity는 새로운 연락처를 추가하여 저장하는
 
 
 + ### Tab 3 음악 플레이어  
-
+<img src="https://user-images.githubusercontent.com/49242646/148055582-62e0f0b1-f1a6-4516-8f34-76e3f69d2b9c.gif" width="205" height="411"/>
 
 + ### Font  
         완도희망체 Bold  
