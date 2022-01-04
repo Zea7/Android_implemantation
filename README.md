@@ -47,9 +47,11 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
   + 하나의 앱으로 합쳤다.  
 
 
-<img src="https://user-images.githubusercontent.com/49242646/148053927-3bb09ee2-24ff-4142-bb52-c15f71270bde.gif" width="205" height="411"/>
+
 
 + ### Tab 1 연락처  
+<img src="https://user-images.githubusercontent.com/49242646/148053927-3bb09ee2-24ff-4142-bb52-c15f71270bde.gif" width="205" height="411"/>   
+
   + MainActivity  
      + MainActivity는 외부 저장소의 연락처를 RecyclerView를 이용하여 전부 보여준다.  
      + 각 아이템을 클릭하면 ContactActivity2를 호출하여 연락처가 가지고 있는 사진, 이름, 전화번호를 크게 보여준다.  
@@ -78,6 +80,7 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 
 
 + ### Tab 2 사진첩  
+<img src="https://user-images.githubusercontent.com/49242646/148055118-4b19e9f2-3532-4967-a333-6da336fc9f36.gif" width="205" height="411"/>   
 
   + MainActivity  
     +  연락처와 마찬가지로 RecyclerView를 (GridLayout)을 이용하여 4개의 column으로 외부 저장소 내의 모든 사진을 보여준다.  
@@ -101,12 +104,13 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
     + CamerActivity는 기본 카메라 앱을 호출하여 사진을 찍으며, 사진을 저장하면 종료된다.  
     + 저장한 사진은 외부 저장소에 저장되기 때문에 메인 화면에서 refresh를 하여 확인할 수 있다.
 
-<img src="https://user-images.githubusercontent.com/49242646/148055118-4b19e9f2-3532-4967-a333-6da336fc9f36.gif" width="205" height="411"/>
+
 
 
 
 
 + ### Tab 3 음악 플레이어  
+<img src="https://user-images.githubusercontent.com/49242646/148055582-62e0f0b1-f1a6-4516-8f34-76e3f69d2b9c.gif" width="205" height="411"/>  
 
   + MainActivity  
     + 위와 마찬가지로 recyclerView를 통해 모든 음악 파일을 보여주며 앨범 이미지, 노래 제목, 아티스트 이름을 띄워준다. 
@@ -119,7 +123,6 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
     + 노래를 처음 클릭하거나 다른 노래로 넘길 때마다 앨범 이미지가 360도 회전하며  
     + audiovisualizer 라이브러리를 이용하여 소리의 음량을 가시화하여 하단에 띄워준다.  
 
-<img src="https://user-images.githubusercontent.com/49242646/148055582-62e0f0b1-f1a6-4516-8f34-76e3f69d2b9c.gif" width="205" height="411"/>
 
 
 + ### Font  
