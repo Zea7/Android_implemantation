@@ -2,7 +2,7 @@
 
 
 ## 팀원  
-- 정민근, KAIST 19, 전산학부Cancel changes
+- 정민근, KAIST 19, 전산학부
 - 최윤정, 숙명여대 19, 컴퓨터과학전공  
 
 # 기본적인 구성  
@@ -129,3 +129,7 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
         완도희망체 Bold  
         프리텐다드   
         카페24 써라운드에어  
+        
+        
++ APK 링크
+[브링Bring APK](https://drive.google.com/file/d/1DGWgsN2rf_4OxdTLBogTIC6ECXTVmWGb/view?usp=sharing)
