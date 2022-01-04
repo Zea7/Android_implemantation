@@ -3,6 +3,7 @@ package com.example.contact;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.database.Cursor;
@@ -20,6 +21,9 @@ public class ContactActivity2 extends AppCompatActivity {
     ImageView iv;
     TextView tv1, tv2;
     private String number;
+    private String name;
+    private String imagePath;
+    public static Activity ContactShowActivity;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -30,6 +34,9 @@ public class ContactActivity2 extends AppCompatActivity {
             Toast.makeText(ContactActivity2.this, "삭제되었습니다", Toast.LENGTH_SHORT).show();
             deleteContact();
             finish();
+        }
+        else if(item.getItemId()==R.id.change_contact){
+            ContactUtils.changeContact(name, number, imagePath, this);
         }
 
 
@@ -49,6 +56,8 @@ public class ContactActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact2);
+
+        ContactShowActivity = ContactActivity2.this;
 
         getSupportActionBar().setTitle("연락처");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,5 +79,7 @@ public class ContactActivity2 extends AppCompatActivity {
         tv1.setText(getIntent().getStringExtra("Name2"));
         tv2.setText(getIntent().getStringExtra("PhoneNumber2"));
         number = getIntent().getStringExtra("PhoneNumber2");
+        name = getIntent().getStringExtra("Name2");
+        imagePath = getIntent().getStringExtra("Icon");
     }
 }

@@ -13,11 +13,11 @@
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:layout_weight="90"
->
+        >
 
         <ImageButton
             android:layout_marginTop="10dp"
-            android:id="@+id/thumnailImage"
+            android:id="@+id/change_image"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:src="@drawable/person"
@@ -25,24 +25,26 @@
             android:layout_marginBottom="10dp"/>
 
         <EditText
-            android:id="@+id/edit_name"
+            android:id="@+id/change_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
             android:textColorHint="#c5c5c5"
             android:hint="이름"
+            android:fontFamily="@font/pretendard_regular"
             android:padding="10dp"
             android:textColor="#000"
             android:inputType="textPersonName"/>
 
         <EditText
             android:layout_marginTop="10dp"
-            android:id="@+id/edit_number"
+            android:id="@+id/change_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
             android:textColorHint="#c5c5c5"
             android:hint="전화번호"
+            android:fontFamily="@font/pretendard_regular"
             android:padding="10dp"
             android:textColor="#000"
             android:inputType="phone"/>
@@ -56,20 +58,22 @@
         android:background="#00ff0000"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/cancel_button"
+            android:id="@+id/cancel_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:text="취소"
+            android:fontFamily="@font/pretendard_regular"
             android:textColor="#000000"
             android:background="#00ff0000"/>
 
         <Button
-            android:id="@+id/save_button"
+            android:id="@+id/save_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:text="저장"
+            android:fontFamily="@font/pretendard_regular"
             android:textColor="#000000"
             android:background="#00ff0000"/>
     </LinearLayout>

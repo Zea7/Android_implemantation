@@ -103,7 +103,11 @@ public class PlayerActivity extends AppCompatActivity {
 
         txtSongName.setText(sName);
         txtSongArtist.setText(sArtist);
-        Glide.with(this).asBitmap().load(imagePath).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
+        UiModeManager ui = (UiModeManager) this.getSystemService(Context.UI_MODE_SERVICE);
+        if(ui.getNightMode() == UiModeManager.MODE_NIGHT_YES)
+            Glide.with(this).asBitmap().load(imagePath).apply(new RequestOptions().error(R.drawable.music_note_white)).into(imageView);
+        else
+            Glide.with(this).asBitmap().load(imagePath).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
 
 
         txtSongName.setText(getIntent().getStringExtra("songName"));
@@ -219,7 +223,12 @@ public class PlayerActivity extends AppCompatActivity {
                 if(audioSessionId != -1){
                     visualizer.setAudioSessionId(audioSessionId);
                 }
-                Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
+                UiModeManager ui = (UiModeManager) getBaseContext().getSystemService(Context.UI_MODE_SERVICE);
+                if(ui.getNightMode() == UiModeManager.MODE_NIGHT_YES)
+                    Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_white)).into(imageView);
+                else
+                    Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
+
 
             }
         });
@@ -247,7 +256,11 @@ public class PlayerActivity extends AppCompatActivity {
                 if(audioSessionId != -1){
                     visualizer.setAudioSessionId(audioSessionId);
                 }
-                Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
+                UiModeManager ui = (UiModeManager) getBaseContext().getSystemService(Context.UI_MODE_SERVICE);
+                if(ui.getNightMode() == UiModeManager.MODE_NIGHT_YES)
+                    Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_white)).into(imageView);
+                else
+                    Glide.with(getBaseContext()).asBitmap().load(musicArrayList.get(position).getImagePath()).apply(new RequestOptions().error(R.drawable.music_note_black)).into(imageView);
             }
         });
 

@@ -107,8 +107,13 @@ public class GalleryUtils {
 
         String[] projection = {MediaStore.MediaColumns.DATA, MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.MediaColumns.DATE_TAKEN, MediaStore.Images.Media._ID};
         cursor = view.getContext().getContentResolver().query(uri, projection, null, null, MediaStore.MediaColumns.DATE_TAKEN + " DESC");
-
         column_index_data = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+        cursor.moveToFirst();
+        absolutePathofImage = cursor.getString(column_index_data);
+        uripath = ContentUris.withAppendedId(MediaStore.Images.Media.getContentUri("external"), Long.parseLong(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID))));
+
+        list.add(new IVitem(absolutePathofImage, uripath));
+
 
         while (cursor.moveToNext()){
             absolutePathofImage = cursor.getString(column_index_data);

@@ -84,6 +84,10 @@ public class ContactUtils {
         Cursor cursor = content.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                 null, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
         cursor.moveToFirst();
+        list.add(new ModelContacts(
+                cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.PHOTO_URI)),
+                cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+                cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))));
         while (cursor.moveToNext()){
             list.add(new ModelContacts(
                     cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.PHOTO_URI)),
@@ -123,6 +127,14 @@ public class ContactUtils {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void changeContact(String name, String number, String imgPath, Context content){
+        Intent intent = new Intent(content, ChangeContact.class);
+        intent.putExtra("name", name);
+        intent.putExtra("number", number);
+        intent.putExtra("image", imgPath);
+        content.startActivity(intent);
     }
 
     private static long getContactID(ContentResolver contactHelper, String number) {
