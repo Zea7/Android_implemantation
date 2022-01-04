@@ -4,6 +4,8 @@
 - 최윤정, 숙명여대 19, 컴퓨터과학전공
 
 # 기본적인 구성
+<img src="https://user-images.githubusercontent.com/49242646/148052515-b2322c63-a9be-476e-87f8-e97c58fc1c49.gif" width="205" height="412"/>     
+
 ## Splash screen
 앱을 실행하면 앱 이름(브링Bring)을 보여주는 Splash Screen이 2초 동안 뜨고 MainActivity로 넘어간다.
 
