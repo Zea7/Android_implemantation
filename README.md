@@ -17,7 +17,6 @@ MainActivity는 3개의 tab을 가지는 Tab layout이다.
 TedPermission Library를 이용하여 권한 허용 요청을 보냈으며,  
 사용하는 권한은 외부 저장소 사용, 외부 연락처 사용, 카메라, 녹음 허용이다.  
 
-
 ### TedPermission  
 ```Java
 String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO};
@@ -28,6 +27,9 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
                 .setDeniedMessage("[설정] > [권한] 에서 권한을 활성화해야 앱이 작동합니다.")
                 .setPermissions(permissions).check();
 ```
+
+## 다크 모드
+휴대폰 내의 다크 모드를 누르면, 앱에 다크 모드가 적용되어 보여진다.
 
 # Tab
 
@@ -47,7 +49,7 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 > 연락처 영역을 클릭하여 상세정보창을 띄우면 다음과 같은 형태로 창이 뜬다.
 ### 사진추가
 > 사진 영역은 연락처 리스트를 보여주었을 때와 마찬가지로 프로필 사진을 보여주며  
-> 이름, 전화번호를 보다 크게 보여준다
+> 이름, 전화번호를 보다 크게 보여준다.
 > 추가, 삭제, 수정 기능 
 
 ## Tab 2 사진첩
