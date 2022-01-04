@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_menu"
-        android:title="@string/Info" />
+        android:title="@string/Info"
+        />
 
     <item
         android:id="@+id/delete"
-        android:title="@string/Del"/>
+        android:title="@string/Del"
+
+        />
 </menu>
