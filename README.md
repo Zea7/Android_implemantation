@@ -101,7 +101,6 @@ cursor = view.getContext().getContentResolver().query(uri, projection, null, nul
 
 > audiovisualizer 라이브러리를 이용하여 소리의 음량에 따라 그래프를 보여준다.
 
-# Reference
 ## Font
 > 완도희망체 Bold  
 > 프리텐다드   
