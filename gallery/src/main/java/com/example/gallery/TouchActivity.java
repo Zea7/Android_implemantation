@@ -80,13 +80,13 @@ public class TouchActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int pos = viewPager2.getCurrentItem();
         if(item.getItemId()==android.R.id.home){
             onBackPressed();
         }
         else if(item.getItemId()==R.id.action_menu)
-            Toast.makeText(TouchActivity.this, imageName, Toast.LENGTH_SHORT).show();
+            Toast.makeText(TouchActivity.this, images.get(pos).getPath().split("/")[images.get(pos).getPath().split("/").length - 1], Toast.LENGTH_SHORT).show();
         else if(item.getItemId()==R.id.delete) {
-            int pos = viewPager2.getCurrentItem();
             alert(images.get(pos).getUri());
         }
 
