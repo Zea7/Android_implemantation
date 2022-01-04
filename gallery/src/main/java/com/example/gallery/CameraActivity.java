@@ -4,8 +4,10 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.exifinterface.media.ExifInterface;
 
 import android.app.Activity;
+import android.app.UiModeManager;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,6 +15,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
+import android.graphics.Matrix;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -22,6 +25,9 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.service.voice.VoiceInteractionSession;
 import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.io.File;
@@ -116,7 +122,14 @@ public class CameraActivity extends AppCompatActivity {
             case REQUEST_TAKE_PHOTO:
                 try {
                     Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                    saveFile(bitmap);
+                    Matrix matrix = new Matrix();
+
+                    matrix.postRotate(90);
+
+                    Bitmap rotatedBitmap;
+                    rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
+                    saveFile(rotatedBitmap);
 
                     finish();
                 } catch (FileNotFoundException e) {
@@ -145,6 +158,7 @@ public class CameraActivity extends AppCompatActivity {
                 Log.d("Capture", "null");
             } else {
                 FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
+
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                 fos.close();
                 values.clear();
