@@ -6,6 +6,7 @@
 - 최윤정, 숙명여대 19, 컴퓨터과학전공  
 
 # 기본적인 구성
+<img src="https://user-images.githubusercontent.com/49242646/148054090-300991dc-dd5f-446f-9287-9678d88f869a.gif" width="205" height="411"/>
 + ### Splash Screen  
 앱을 실행하면 앱 이름(브링Bring)을 보여주는 Splash Screen이 2초 동안 뜨고 MainActivity로 넘어간다.
 
@@ -36,12 +37,16 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 
 # Tab
 
+
 + 모듈화
   + 각 탭별로 분할하여 따로 작업하였기에, 각각의 탭을 별개의 application으로 만들어 테스트한 후,  
   + Library로 바꾸어 app 내의 MainActivity와 연결하여 합쳤다.  
   + 이 때 TabLayout과 ViewPager2를 연결하였기 때문에  
   + 각 탭별로 fragment를 만들어 해당 fragment와 각 모듈의 MainAcivity를 method로 만들어준 Util class를 통해  
   + 하나의 앱으로 합쳤다.  
+
+
+<img src="https://user-images.githubusercontent.com/49242646/148053927-3bb09ee2-24ff-4142-bb52-c15f71270bde.gif" width="205" height="411"/>
 
 + ### Tab 1 연락처  
   + MainActivity  
@@ -72,6 +77,7 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 
 
 + ### Tab 2 사진첩  
+
   + MainActivity  
     +  연락처와 마찬가지로 RecyclerView를 (GridLayout)을 이용하여 4개의 column으로 외부 저장소 내의 모든 사진을 보여준다.  
     +  사진은 MediaStore를 통하여 불러왔다. 
@@ -94,9 +100,13 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
     + CamerActivity는 기본 카메라 앱을 호출하여 사진을 찍으며, 사진을 저장하면 종료된다.  
     + 저장한 사진은 외부 저장소에 저장되기 때문에 메인 화면에서 refresh를 하여 확인할 수 있다.
 
+<img src="https://user-images.githubusercontent.com/49242646/148055118-4b19e9f2-3532-4967-a333-6da336fc9f36.gif" width="205" height="411"/>
+
+
 
 
 + ### Tab 3 음악 플레이어  
+
   + MainActivity  
     + 위와 마찬가지로 recyclerView를 통해 모든 음악 파일을 보여주며 앨범 이미지, 노래 제목, 아티스트 이름을 띄워준다. 
     + 음악은 MediaStore를 통하여 불러왔다.   
@@ -107,6 +117,8 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
     + 5개의 버튼을 통해 상호작용할 수 있으며, 왼쪽부터 차례대로 10초 전으로 가기, 이전 노래로 넘기기, 멈춤/재생, 다음 노래로 넘기기, 10초 뒤로 가기이다.  
     + 노래를 처음 클릭하거나 다른 노래로 넘길 때마다 앨범 이미지가 360도 회전하며  
     + audiovisualizer 라이브러리를 이용하여 소리의 음량을 가시화하여 하단에 띄워준다.  
+
+<img src="https://user-images.githubusercontent.com/49242646/148055582-62e0f0b1-f1a6-4516-8f34-76e3f69d2b9c.gif" width="205" height="411"/>
 
 
 + ### Font  
