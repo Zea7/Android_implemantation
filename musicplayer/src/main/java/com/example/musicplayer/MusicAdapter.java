@@ -38,15 +38,17 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull MusicAdapter.ViewHolder holder, int position) {
         int p = position;
         final Music temp = music.get(position);
-        ImageView contact_icon;
-        TextView contact_name;
+        ImageView music_icon;
+        TextView song_name, song_artist;
 
-        contact_icon = holder.musicThumb;
-        contact_name = holder.musicName;
+        music_icon = holder.musicThumb;
+        song_name = holder.musicName;
+        song_artist = holder.musicArtist;
 
         UiModeManager ui = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
 
-        contact_name.setText(music.get(position).getName());
+        song_name.setText(music.get(position).getName());
+        song_artist.setText(music.get(position).getArtist());
         Uri uri = Uri.parse(music.get(position).getUriStr());
         String albumId = music.get(position).getAlbumId();
         String imagePath = music.get(position).getImagePath();
@@ -64,9 +66,9 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                         }
                         else{
                             if(ui.getNightMode() == UiModeManager.MODE_NIGHT_YES)
-                                Glide.with(context).load(R.drawable.music_note_white).into(contact_icon);
+                                Glide.with(context).load(R.drawable.music_note_white).into(music_icon);
                             else
-                                Glide.with(context).load(R.drawable.music_note_black).into(contact_icon);
+                                Glide.with(context).load(R.drawable.music_note_black).into(music_icon);
 
                         }
                     }
@@ -84,6 +86,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
                 intent.putExtra("songs", temp.getUriStr());
                 intent.putExtra("songImage", temp.getImagePath());
                 intent.putExtra("songName", temp.getName());
+                intent.putExtra("songArtist", temp.getArtist());
                 intent.putExtra("position", p);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -97,13 +100,14 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView musicName;
+        private TextView musicName, musicArtist;
         private ImageView musicThumb, button;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             button = itemView.findViewById(R.id.itemBtn);
             musicName = itemView.findViewById(R.id.songName);
+            musicArtist = itemView.findViewById(R.id.songArtist);
             musicThumb = itemView.findViewById(R.id.songImage);
 
         }

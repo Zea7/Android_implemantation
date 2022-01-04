@@ -3,10 +3,11 @@ package com.example.musicplayer;
 import java.io.Serializable;
 
 public class Music implements Serializable {
-    private String name, album,  duration, uriStr, albumId,imagePath;
+    private String name, artist, album,  duration, uriStr, albumId,imagePath;
 
-    public Music(String name, String album, String duration, String uriStr, String albumId, String imagePath) {
+    public Music(String name, String artist, String album, String duration, String uriStr, String albumId, String imagePath) {
         this.name = name;
+        this.artist = artist;
         this.album = album;
         this.duration = duration;
         this.uriStr = uriStr;
@@ -20,6 +21,14 @@ public class Music implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 
     public String getAlbum() {
