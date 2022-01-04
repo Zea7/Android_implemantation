@@ -97,7 +97,6 @@ public class IVAdapter extends RecyclerView.Adapter<IVAdapter.IVHolder> {
 
                 Intent intent = new Intent(content, TouchActivity.class);
 
-                intent.putExtra("images", images);
                 intent.putExtra("image_path", item.getPath());
                 intent.putExtra("image_uri", item.getUri());
                 intent.putExtra("num", p);
