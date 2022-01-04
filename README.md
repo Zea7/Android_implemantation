@@ -35,7 +35,7 @@ String[] permissions = new String[] {Manifest.permission.READ_CONTACTS, Manifest
 
 
 # Tab
-
+<img src="https://user-images.githubusercontent.com/49242646/148053927-3bb09ee2-24ff-4142-bb52-c15f71270bde.gif" width="205" height="411"/>
 + ### Tab 1 연락처  
   + MainActivity  
 MainActivity는 외부 저장소의 연락처를 RecyclerView를 이용하여 전부 보여준다.  
