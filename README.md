@@ -1,11 +1,12 @@
-# 몰입캠프 1주차 (12.28 ~ 01.04)
-Android implementation
-
-# 참가자
+# 브링Bring
+## 팀원
 - 정민근, KAIST 19, 전산학부
 - 최윤정, 숙명여대 19, 컴퓨터과학전공
 
 # 기본적인 구성
+## Splash Screen
+앱을 실행하면 앱 이름(브링Bring)을 보여주는 Splash Screen이 2초 동안 뜨고 MainActivity로 넘어간다.
+
 ## Tab layout & ViewPager 2
 MainActivity는 3개의 tab을 가지는 Tab layout이다.  
 여기에 VPAdapter(@FragmentStateAdapter)를 사용하여 ViewPager 2를 연결해주어 Tab layout과 Viewpager를 동시에 사용하였다.

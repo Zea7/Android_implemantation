@@ -17,6 +17,11 @@
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/cafe_font</item>
         <item name="android:fontStyle">normal</item>
-
     </style>
+    <style name="Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/navy</item>
+        <item name="colorPrimaryDark">@color/invi_navy</item>
+        <item name="colorAccent">@color/navy</item>
+    </style>
+
 </resources>
